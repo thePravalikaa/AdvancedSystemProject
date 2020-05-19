@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
+<head th:replace="common/header :: common-header" />
+
+<body>
+	<div th:replace="common/header :: navbar" />
+
+
+
+	<div class="container">
+		<div class="row">
+
+			<form class="form-horizontal" th:action="@{/order/searchOrders}"
+				method="post" enctype="multipart/form-data">
+
+				<fieldset>
+
+					<legend class="center-block">
+						Back Orders Information<span style="font-size: small"> * is
+							a required field</span>
+					</legend>
+
+
+					<!-- start date -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="startDate">*
+							Start Date</label>
+						<div class="col-md-8">
+							<input type="date" required="required" class="form-control"
+								id="startDate" name="startDate" placeholder="Start Date"
+								max="2019-01-25" />
+						</div>
+					</div>
+
+					<!-- end date -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="endDate">* End
+							Date</label>
+						<div class="col-md-8">
+							<input type="date" required="required" class="form-control"
+								id="endDate" name="endDate" placeholder="End Date"
+								max="2019-01-25" />
+						</div>
+					</div>
+
+
+
+					<div class="form-group">
+						<div class="col-md-2"></div>
+						<div class="col-md-8">
+							<button type="submit" id="addBookSuccess" class="btn btn-success">Search
+								Back Orders</button>
+						</div>
+					</div>
+
+				</fieldset>
+			</form>
+		</div>
+	</div>
+
+	<br/><br/>
+
+	<div class="table-responsive">
+		<div class="container">
+			<div class="table-responsive">
+				<table id="orderListTable"
+					class="table table-bordered table-hover table-striped">
+					<thead>
+						<tr>
+
+							<th>User Full Name</th>
+							<th>Book Title</th>
+							<th>Book Author</th>
+							<th>Book Category</th>
+							<th>Order Date</th>
+							<th>Order Status</th>
+							<th>Shipping Method</th>
+							<th>Order Total</th>
+							<th>In Stock When Ordered</th>
+							<th>User Ordered</th>
+							<th>User Required More</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr data-th-each="order : ${orderList}">
+							<td th:text="${order.userName}"></td>
+							<td th:text="${order.bookTitle}"></td>
+							<td th:text="${order.bookAuthorName}"></td>
+							<td th:text="${order.bookCategory}"></td>
+							<td id="orderDate" th:text="${order.orderDate}"></td>
+							<td th:text="${order.orderStatus}"></td>
+							<td th:text="${order.shippingMethod}"></td>
+							<td th:text="${order.orderTotal}"></td>
+							<td th:text="${order.inStock}"></td>
+							<td th:text="${order.stockOrdered}"></td>
+							<td th:text="${order.OutOfStock}"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+
+	</div>
+
+
+	<div th:replace="common/header :: body-bottom-scripts" />
+
+	<!-- <script>
+		$(document).ready(function() {
+			$("#orderListTable").DataTable({
+				"lengthMenu": [[5,10,15,20,-1],[5,10,15,20,"All"]],
+				"ordering": false,
+				stateSave: true
+			});
+		});
+	</script> -->
+</body>
+</html>
